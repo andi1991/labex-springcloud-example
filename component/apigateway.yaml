@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: host_route
+          uri: lb://server
+          predicates:
+            - Path=/status
+        - id: order_route
+          uri: lb://server
+          predicates:
+            - Path=/**
+

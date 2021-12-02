@@ -1,0 +1,44 @@
+version: '3.5'
+
+services:
+  labex1:
+    image: lwx372123/labexmicroservice:v1
+    container_name: labex1_docker
+    command: [ "java", "-jar", "com_guigu_service1-0.0.1-SNAPSHOT.jar" ]
+    environment:
+      NACOS_ENDPOINT: "47.251.47.15:8079"
+      LOGNAME: "labex1"
+    networks:
+      rmq:
+        aliases:
+          - labex1
+
+  labex2:
+    image: lwx372123/labexmicroservice:v1
+    container_name: labex2_docker
+    command: [ "java", "-jar", "com_guigu_service1-0.0.1-SNAPSHOT.jar" ]
+    environment:
+      NACOS_ENDPOINT: "47.251.47.15:8079"
+      LOGNAME: "labex2"
+    networks:
+      rmq:
+        aliases:
+          - labex2
+
+  apigateway:
+    image: lwx372123/labexmicroapigateway:v2
+    container_name: apigateway_svc
+    ports:
+      - 8078:8078
+    command: [ "java", "-jar", "com_labex_apigateway-0.0.1-SNAPSHOT.jar" ]
+    environment:
+      NACOS_ENDPOINT: "47.251.47.15:8079"
+    networks:
+      rmq:
+        aliases:
+          - apigateway
+    
+networks:
+  rmq:
+    name: rmq
+    driver: bridge
