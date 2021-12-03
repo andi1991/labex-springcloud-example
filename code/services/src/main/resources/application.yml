@@ -1,0 +1,10 @@
+#spring:
+#  cloud:
+#    sentinel:
+#      transport:
+#        port: 8719
+#        dashboard: 47.88.15.169:8080
+
+## rocketmq
+# rocketmq:
+#  endpoint: 47.88.15.169:9876
