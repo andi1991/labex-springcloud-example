@@ -10,8 +10,25 @@ spring:
           uri: lb://server
           predicates:
             - Path=/status
-        - id: order_route
+        - id: name_route
           uri: lb://server
           predicates:
-            - Path=/**
-
+            - Path=/getName
+        - id: config_route
+          uri: lb://server
+          predicates:
+            - Path=/config/get
+        - id: mysql_route
+          uri: lb://server
+          predicates:
+            - Path=/selectFromMysql
+            - Path=/insertToMysql
+        - id: redis_route
+          uri: lb://server
+          predicates:
+            - Path=/selectFromRedis
+        - id: rocket_route
+          uri: lb://server
+          predicates:
+            - Path=/syncMessage
+            - Path=/sendMessage
