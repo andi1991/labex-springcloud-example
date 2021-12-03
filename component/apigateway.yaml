@@ -18,17 +18,31 @@ spring:
           uri: lb://server
           predicates:
             - Path=/config/get
-        - id: mysql_route
+        - id: mysql_select_route
           uri: lb://server
           predicates:
             - Path=/selectFromMysql
+        - id: mysql_insert_route
+          uri: lb://server
+          predicates:
             - Path=/insertToMysql
         - id: redis_route
           uri: lb://server
           predicates:
             - Path=/selectFromRedis
-        - id: rocket_route
+        - id: rocket_send_route
           uri: lb://server
           predicates:
-            - Path=/syncMessage
             - Path=/sendMessage
+        - id: rocket_sync_route
+          uri: lb://server
+          predicates:
+            - Path=/syncMessage      
+        
+        
+        #- id: order_route
+        #  uri: lb://server
+        #  predicates:
+        #    - Path=/**
+
+ 
