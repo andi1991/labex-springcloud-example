@@ -1,0 +1,39 @@
+[{
+    "filters": [],
+    "id": "cookie_route",
+    "order": 0,
+    "predicates": [{
+        "args": {
+            "pattern": "/version"
+        },
+        "name": "Path"
+    },
+    {
+      "name": "Cookie",
+      "args": {
+         "name": "name",
+         "regexp": "labex"
+      }
+    }],
+    "uri": "lb://green"
+},
+{
+    "filters": [],
+    "id": "header_route",
+    "order": 0,
+    "predicates": [{
+        "args": {
+            "pattern": "/version"
+        },
+        "name": "Path"
+    },
+    {
+      "name": "Header",
+      "args": {
+         "header": "user-agent",
+         "regexp": "Firefox"
+      }
+    }],
+    "uri": "lb://green"
+}
+]

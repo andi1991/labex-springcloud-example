@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  nacos:
+    image: nacos/nacos-server:2.0.2
+    container_name: nacos_svc
+    ports: 
+      - 8079:8848
+    environment:
+      MODE: standalone
+    networks:
+      rmq:
+        aliases:
+          - nacos
+
+networks:
+  rmq:
+    name: rmq
+    driver: bridge

@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: default_route
+          uri: lb://blue
+          predicates:
+            - Path=/version

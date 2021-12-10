@@ -1,0 +1,53 @@
+version: '3.5'
+
+services:
+  apigateway:
+      image: lwx372123/labexmicroapigateway:v3
+      container_name: blue
+      ports:
+       - 8078:8078
+      command: [ "java", "-jar", "com_labex_apigateway-0.0.1-SNAPSHOT.jar" ]
+      environment:
+        NACOS_ENDPOINT: "47.251.14.57:8079"
+      networks:
+        rmq:
+          aliases:
+            - apigateway
+
+
+  blue:
+    image: lwx372123/labexbluegreenservice:v1
+    container_name: blue
+    # ports:
+    #  - 9000:9000
+    command: [ "java", "-jar", "com_guigu_service2-0.0.1-SNAPSHOT.jar" ]
+    environment:
+      NACOS_ENDPOINT: "47.251.14.57:8079"
+      SERVER_NAME: "blue"
+      PORT: "9000"
+      VERSION: "blue"
+    networks:
+      rmq:
+        aliases:
+          - blue
+
+  green:
+    image: lwx372123/labexbluegreenservice:v1
+    container_name: green
+    # ports:
+    #  - 8999:8999
+    command: [ "java", "-jar", "com_guigu_service2-0.0.1-SNAPSHOT.jar" ]
+    environment:
+      NACOS_ENDPOINT: "47.251.14.57:8079"
+      SERVER_NAME: "green"
+      PORT: "8999"
+      VERSION: "green"
+    networks:
+      rmq:
+        aliases:
+          - green
+
+networks:
+  rmq:
+    name: rmq
+    driver: bridge
